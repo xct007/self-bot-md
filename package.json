@@ -1,0 +1,22 @@
+{
+	"name": "self-bot-md",
+	"version": "1.0.0",
+	"description": "SELF-BOT-MD",
+	"main": "index.js",
+	"scripts": {
+        "start": "node index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "FrierenDv",
+	"license": "MIT",
+	"dependencies": {
+		"@adiwajshing/baileys": "^4.4.0",
+		"@adiwajshing/keyed-db": "^0.2.4",
+		"@hapi/boom": "^10.0.0",
+		"colors": "^1.4.0",
+		"image-thumbnail": "^1.0.15",
+		"jimp": "^0.16.2",
+		"pino": "^8.7.0",
+		"qrcode-terminal": "^0.12.0"
+	}
+}

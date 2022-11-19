@@ -1,0 +1,4 @@
+session/
+data.store.json
+node_modules
+*lock.json
