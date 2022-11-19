@@ -139,10 +139,16 @@ exports.commands = async (sock, m) => {
 							return msg.reply(`Reply/Send the image with caption !${CMD}`);
 						const buffer = await downloadMediaMessage(file, "buffer");
 						const fakeThumb = await genThumb(buffer);
-						fs.writeFileSync("../fake.jpeg", fakeThumb);
-						return await sock.sendMessage(msg.from, {
-							text: "Fake thumbail set !",
-						});
+						await fs.writeFileSync(__dirname + "/thumbnail/fake.jpeg", fakeThumb);
+						return await sock.sendMessage(
+							msg.from,
+							{
+								text: "Fake thumbnail set !",
+							},
+							{
+								quoted: msg
+							}
+						);
 					}
 					break;
 				case "setreal":
@@ -158,26 +164,35 @@ exports.commands = async (sock, m) => {
 						if (!mime)
 							return msg.reply(`Reply/Send the image with caption !${CMD}`);
 						const buffer = await downloadMediaMessage(file, "buffer");
-						fs.writeFileSync("../real.jpeg", fakeThumb);
-						return await sock.sendMessage(msg.from, {
-							text: "Real image set !",
-						});
+						await fs.writeFileSync(__dirname + "/thumbnail/real.jpeg", buffer);
+						return await sock.sendMessage(
+							msg.from,
+							{
+								text: "Real image set !",
+							},
+							{
+								quoted: msg
+							}
+						);
 					}
 					break;
 				case "send":
 					{
 						const fs = require("fs");
-						if (!fs.existsSync("../thumbail/fake.jpeg")) {
+						const real = __dirname + "/thumbnail/real.jpeg"
+						cconst fake = __dirname + "/thumbnail/fake.jpeg")
+						if (!fs.existsSync(fake)) {
 							return msg.reply("Fake thumbnail not set!");
-						} else if (!fs.existsSync("../thumbail/real.jpeg")) {
+						} else if (!fs.existsSync(real)) {
 							return msg.reply("Real image not set!");
 						}
 						return await sock.sendMessage(
 							msg.from,
 							{
-								image: fs.readFileSync("../thumbnail/real.jpeg"),
+								image: fs.readFileSync(real),
+								fileLength: Buffer.from(fs.readFileSync(real)) = a => a.length
 								jpegThumbnail: fs.readFileSync(
-									"../thumbnail/fake.jpeg",
+									fake,
 									"base64"
 								),
 							},
