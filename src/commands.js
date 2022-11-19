@@ -139,14 +139,17 @@ exports.commands = async (sock, m) => {
 							return msg.reply(`Reply/Send the image with caption !${CMD}`);
 						const buffer = await downloadMediaMessage(file, "buffer");
 						const fakeThumb = await genThumb(buffer);
-						await fs.writeFileSync(__dirname + "/thumbnail/fake.jpeg", fakeThumb);
+						await fs.writeFileSync(
+							__dirname + "/thumbnail/fake.jpeg",
+							fakeThumb
+						);
 						return await sock.sendMessage(
 							msg.from,
 							{
 								text: "Fake thumbnail set !",
 							},
 							{
-								quoted: msg
+								quoted: msg,
 							}
 						);
 					}
@@ -171,7 +174,7 @@ exports.commands = async (sock, m) => {
 								text: "Real image set !",
 							},
 							{
-								quoted: msg
+								quoted: msg,
 							}
 						);
 					}
@@ -179,8 +182,8 @@ exports.commands = async (sock, m) => {
 				case "send":
 					{
 						const fs = require("fs");
-						const real = __dirname + "/thumbnail/real.jpeg"
-						cconst fake = __dirname + "/thumbnail/fake.jpeg")
+						const real = __dirname + "/thumbnail/real.jpeg";
+						const fake = __dirname + "/thumbnail/fake.jpeg";
 						if (!fs.existsSync(fake)) {
 							return msg.reply("Fake thumbnail not set!");
 						} else if (!fs.existsSync(real)) {
@@ -191,10 +194,7 @@ exports.commands = async (sock, m) => {
 							{
 								image: fs.readFileSync(real),
 								/*fileLength: Buffer.from(fs.readFileSync(real)) = a => a.length,*/
-								jpegThumbnail: fs.readFileSync(
-									fake,
-									"base64"
-								),
+								jpegThumbnail: fs.readFileSync(fake, "base64"),
 							},
 							{
 								quoted: msg,

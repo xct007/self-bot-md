@@ -49,7 +49,7 @@ const connect = async () => {
 		syncFullHistory: true,
 	});
 
-	//store?.bind(sock.ev)
+	store?.bind(sock.ev);
 
 	Log("Connection Status : " + "Connecting");
 	sock.ev.process(async (events) => {
