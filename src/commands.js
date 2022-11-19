@@ -190,7 +190,7 @@ exports.commands = async (sock, m) => {
 							msg.from,
 							{
 								image: fs.readFileSync(real),
-								fileLength: Buffer.from(fs.readFileSync(real)) = a => a.length
+								/*fileLength: Buffer.from(fs.readFileSync(real)) = a => a.length,*/
 								jpegThumbnail: fs.readFileSync(
 									fake,
 									"base64"
